@@ -160,8 +160,8 @@ class RefreshTokenGrantTypeHandler extends AbstractGrantTypeHandler
             }
         }
 
-        // Delete this refresh token and new one will be issued
-        $refreshTokenManager->deleteModel($result);
+        // Expire this refresh token and new one will be issued
+        $result->setExpires(new \DateTime('+ 5 minutes'));
 
         return [$username, $scope];
     }
